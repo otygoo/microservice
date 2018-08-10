@@ -1,0 +1,6 @@
+生成modules 跟 只有个 pom文件
+mvn archetype:generate -DgroupId=nuctech.bigdata -DartifactId=civilaviation -Dversion=1.0-SNAPSHOT -DarchetypeGroupId=org.codehaus.mojo.archetypes -DarchetypeArtifactId=pom-root -DinteractiveMode=false -DarchetypeVersion=RELEASE
+
+
+在上面跟目录里面创建子项目
+mvn archetype:generate -DgroupId=nuctech.bigdata.civilaviation -DartifactId=apigateway -Dversion=1.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false -DarchetypeVersion=RELEASE
