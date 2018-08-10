@@ -1,0 +1,69 @@
+debug: true
+server:
+    port: 8001
+
+spring:
+    application:
+        name: servicetemplate
+    profiles:
+        active: dev
+    cloud:
+        # config:
+        #     enabled: false
+        # refresh:
+        #     refreshable: none
+        consul:
+            host: 127.0.0.1
+            port: 8500
+            discovery:
+                enabled: true
+                healthCheckInterval: 5s
+                service-name: ${spring.application.name} 
+                instance-id: ${spring.application.name}-${spring.cloud.consul.host}-${spring.cloud.consul.port}
+                #tags:  ${spring.application.name} 
+  
+            config:
+                enabled: true
+                # 指定consul配置的文件夹前缀为config
+                #prefix: config
+                #指定consul配置的配置文件父路径
+                defaultContext: ${spring.application.name} 
+                profileSeparator: '.'
+                # 指定consul配置的配置文件为configuration
+                data-key: configuration
+                # 指定consul配置的配置文件格式properties（maven），gradle为（YAML）
+                format: YAML
+                #format: FILES
+               
+                watch:
+                    enabled: true
+                    delay: 60000
+
+
+
+ 
+    datasource:
+        url: ${datasource.url} 
+        # jdbc:mysql://10.14.32.105:3306/db_check_platform?characterEncoding=utf-8&useSSL=false
+        driver-class-name: ${datasource.driver-class-name}  
+        # com.mysql.jdbc.Driver
+        username:  ${datasource.username} 
+        password:  ${datasource.password} 
+        #initialization-mode: always
+        #max-active: 20
+        #max-idle: 8
+        #min-idle: 8
+        #initial-size: 10
+        
+    jpa:
+        show-sql: ${jpa.show-sql}
+        hibernate:
+            ddl-auto: ${jpa.ddl-auto}
+
+# swagger:
+#   butler:
+#     auto-generate-from-zuul-routes: false
+#     # generate-routes: servicetemplate
+#     #ignore-routes: consul,nullserver
+#     api-docs-path: /v2/api-docs
+#     swagger-version: 2.0

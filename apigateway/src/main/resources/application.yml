@@ -1,0 +1,78 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: apigateway
+
+zuul:
+  routes:
+    nullserver:
+      path: /nullserver/**
+      serviceId: nullserver
+
+
+
+logging:
+  level:
+   org.springframework: INFO
+   com.netflix: DEBUG
+
+
+swagger:
+  butler:
+    auto-generate-from-zuul-routes: true
+    # generate-routes: servicetemplate
+    ignore-routes: consul,nullserver
+    ignore-controllers:
+    # api-docs-path: /v2/api-docs
+    # swagger-version: 2.0
+
+
+
+
+
+# spring.application.name = gatewayServer
+
+# spring.cloud.consul.host=${server.host}
+# spring.cloud.consul.port=${server.port}
+
+# spring.cloud.consul.discovery.healthCheckPath=${management.contextPath}/health
+# spring.cloud.consul.discovery.healthCheckInterval=15s
+# spring.cloud.consul.discovery.instance-id=gatewayServer
+
+# spring.cloud.consul.discovery.enabled=true
+# spring.cloud.consul.discovery.register=true
+# spring.cloud.consul.discovery.service-name=gatewayServer
+
+# spring.cloud.consul.discovery.lifecycle.enabled=true
+# spring.cloud.consul.discovery.scheme=http
+# spring.cloud.consul.discovery.prefer-agent-address=false
+
+# spring.cloud.consul.host=${server.host}
+# spring:
+#   application:
+#     name: gatewayServer
+#   cloud:
+#     consul:
+#       discovery:
+#         preferIpAddress: true
+#         enabled: true
+#         register: true
+#         service-name: api-getway
+#         ip-address: localhost
+#         port: ${server.port}
+#         lifecycle:
+#           enabled: true
+#         scheme: http
+#         prefer-agent-address: false
+#       host: localhost
+#       port: 8500
+
+# zuul.host.maxTotalConnections=500
+# zuul.host.maxPerRouteConnections=50
+
+#   routes:
+# #     api-a:
+# #       path: /aaa/**
+# #       serviceId: service-ribbon

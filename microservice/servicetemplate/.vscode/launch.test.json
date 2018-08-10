@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "servicetemplate",
+                "projectName": "servicetemplate",
+                "workingDirectory": "d:\\WorkSpace\\CodeSpace\\microservice\\servicetemplate",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "servicetemplate",
+                "projectName": "servicetemplate",
+                "workingDirectory": "d:\\WorkSpace\\CodeSpace\\microservice\\servicetemplate",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

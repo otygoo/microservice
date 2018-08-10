@@ -1,0 +1,11 @@
+consul kv get -recurse //查看所有的 key value
+consul kv put config/servicetemplate/configuration
+
+testconfig.username: roo333232222
+datasource.url: jdbc:mysql://10.14.32.105:3306/db_check_platform?characterEncoding=utf8&useSSL=false
+datasource.driver-class-name: com.mysql.jdbc.Driver
+datasource.username: root
+datasource.password: 123456
+
+jpa.ddl-auto: validate
+jpa.show-sql: true

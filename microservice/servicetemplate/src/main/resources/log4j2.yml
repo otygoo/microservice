@@ -1,0 +1,58 @@
+Configuration:
+#  status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置# 成trace时 你会看到log4j2内部各种详细输出。可以设置成OFF(关闭) 或 # Error(只输出错误信息)。
+  status: trace
+
+  Properties: # 定义全局变量
+    Property: # 缺省配置（用于开发环境）。其他环境需要在VM参数中指定，如下：
+      #测试：-Dlog.level.console=warn -Dlog.level.xxx=trace
+      #生产：-Dlog.level.console=warn -Dlog.level.xxx=info
+      - name: log.level.console
+        value: trace
+      - name: log.level.xxx
+        value: trace
+      - name: log.path
+        value: /logs/
+      - name: project.name
+        value: log
+
+  Appenders:
+    Console:  #输出到控制台
+      name: CONSOLE
+      target: SYSTEM_OUT
+      ThresholdFilter:
+        level: ${sys:log.level.console} # “sys:”表示：如果VM参数中没指定这个变量值，则使用本文件中定义的缺省全局变量值
+        onMatch: ACCEPT
+        onMismatch: DENY
+      PatternLayout:
+        pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+    RollingFile: # 输出到文件，超过128MB归档
+      - name: ROLLING_FILE
+        ignoreExceptions: false
+        fileName: ${log.path}/${project.name}.log
+        filePattern: "${log.path}/$${date:yyyy-MM-dd}/${project.name}-%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d %p %C{0}  %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "10 MB"
+        #一个文件夹下面的文件个数，默认为7
+        DefaultRolloverStrategy:
+          max: 1000
+        # 控制输出内容
+        Filters:
+          ThresholdFilter:
+            level: trace
+
+  Loggers:
+    Root:
+      level: trace
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: ROLLING_FILE
+#    Logger: # 为com.xxx包配置特殊的Log级别，方便调试
+#      - name: com.xxx
+#        additivity: false
+#        level: ${sys:log.level.xjj}
+#        AppenderRef:
+#          - ref: CONSOLE
+#          - ref: ROLLING_FILE
