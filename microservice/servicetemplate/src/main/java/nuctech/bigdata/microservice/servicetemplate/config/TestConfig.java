@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="testconfig")
 public class  TestConfig{
   
-    private String username;//要与consul上面一致
+    private String username;// 要与 consul上面一致
  
     public String getUsername() {
         return username;
